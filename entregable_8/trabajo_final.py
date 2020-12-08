@@ -58,6 +58,24 @@ def verProducto():
         print()
     print()
 
+# Permite mostrar todos los productos existentes para la venta
+def verProductoVenta():
+    if len(productos) == 0:
+        print("- No hay registros para mostrar -")
+        return 0
+    for i in encabezadosProdVenta:
+
+        print(i, end="\t\t")
+    print()
+    for i in productos:
+        index = 0
+        for j in i.values():
+            if (index == 0) or (index == 1):
+                print(j, end="\t\t")
+            index = index + 1
+        print()
+    print()
+
 # Permite eliminar los productos existentes (incluidas sus promociones)
 def eliminarProducto():
     global productos
@@ -188,7 +206,7 @@ def realizarVenta():
     finBusqueda = False
     while salir == False:
         print("Ingrese el valor de ID de uno de los productos siguientes:")
-        verProducto()
+        verProductoVenta()
         cadena = input() # Recuperamos el id y precio del registro que le cargaremos un precio de promoción
         encontrado = False
         indiceEncontrado = ""
@@ -276,6 +294,7 @@ def controlarOferta(indiceEncontrado, precio):
 
 productos = []
 encabezadosProd = ["id", "nombre", "precio", "stock"]
+encabezadosProdVenta = ["id", "nombre"]
 promociones = []
 encabezadosProm = ["id", "nombre", "precio"]
 ventas = []
