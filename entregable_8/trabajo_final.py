@@ -4,6 +4,7 @@
 
 from random import randrange
 
+# Permite obtener un número de ID único (en un rango que va del 0 al 100)
 def obtenerIndice():
     global productos
     control = False
@@ -26,6 +27,7 @@ def obtenerIndice():
                 control = True
     return indice
 
+# Permite agregar nuevos productos
 def agregarProducto():
     global productos
     productosAux = dict.fromkeys(encabezadosProd, "")
@@ -42,6 +44,7 @@ def agregarProducto():
     print("- Se ha agregado correctamente el producto -")
     print()
 
+# Permite mostrar todos los productos existentes
 def verProducto():
     if len(productos) == 0:
         print("- No hay registros para mostrar -")
@@ -55,14 +58,13 @@ def verProducto():
         print()
     print()
 
+# Permite eliminar los productos existentes (incluidas sus promociones)
 def eliminarProducto():
     global productos
     print("Indique el valor de ID del registro a eliminar:")
     verProducto()
-    
     encontrado = False
-    # Recuperamos el id del registro a eliminar
-    cadena = input()
+    cadena = input() # Recuperamos el id del registro a eliminar
     for i in productos:
         for j in i.values():
             if j == int(cadena):
@@ -75,18 +77,17 @@ def eliminarProducto():
     print("- Se ha eliminado correctamente el producto -")
     print()
 
+# Permite agregar una promoción a los productos existentes
 def agregarPromocion():
     global productos
     print("Indique el valor de ID del registro a agregarle una promoción:")
     verProducto()
-
     encontrado = False
     salir = False
     indiceEncontrado = ""
     precioEncontrado = ""
     nombreEncontrado = ""
-    # Recuperamos el id y precio del registro que le cargaremos un precio de promoción
-    cadena = input()
+    cadena = input() # Recuperamos el id y precio del registro que le cargaremos un precio de promoción
     for i in productos:
         index = 0
         for j in i.values():
@@ -116,6 +117,7 @@ def agregarPromocion():
     print("- Se ha agregado correctamente la promoción -")
     print()
 
+# Permite mostrar todas las promociones existentes
 def verPromocion():
     if len(promociones) == 0:
         print("- No hay registros para mostrar -")
@@ -131,6 +133,7 @@ def verPromocion():
     
     pass
 
+# Permite eliminar las promociones existentes
 def eliminarPromocion(index):
     global productos
     print("Indique el valor de ID del registro a eliminar:")
@@ -150,10 +153,24 @@ def eliminarPromocion(index):
     print("- Se ha eliminado correctamente la promoción -")
     print()
 
+# Permite cargar automáticamente productos y promociones en el sistema
+def cargaAutomatica():
+    print("Carga automática de productos")
+
+# Permite realizar una venta
+def realizarVenta():
+    print("realizar venta")
+
+# Permite mostrar todas las ventas existentes
+def verVentas():
+    print("ver ventas")
+
 productos = []
 encabezadosProd = ["id", "nombre", "precio", "stock"]
 promociones = []
 encabezadosProm = ["id", "nombre", "precio"]
+ventas = []
+encabezadosVentas = ["id", "nombre", "precio", "cantidad"]
 
 salir = False
 while salir == False:
@@ -165,7 +182,10 @@ while salir == False:
     print(" 4 - Agregar promoción")
     print(" 5 - Ver promoción")
     print(" 6 - Eliminar promoción")
-    print(" 7 - Salir del programa")
+    print(" 7 - Cargar automática (prod. y promos)")
+    print(" 8 - Realizar venta")
+    print(" 9 - Ver ventas realizadas")
+    print(" 10 - Salir del programa")
 
     cadena = input()
     if cadena == "1":
@@ -184,4 +204,10 @@ while salir == False:
         cadena = input()
         eliminarPromocion(int(cadena))
     elif cadena == "7":
+        cargaAutomatica()
+    elif cadena == "8":
+        realizarVenta()
+    elif cadena == "9":
+        verVentas()
+    elif cadena == "10":
         salir = True
