@@ -111,7 +111,7 @@ def agregarPromocion():
         elif i == "nombre":
             promocionAux[i] = nombreEncontrado
         elif i == "precio":
-            promocionAux[i] = precioEncontrado
+            promocionAux[i] =  ((85 * float(precioEncontrado)) / 100)
     promociones.append(promocionAux)
     print("- Se ha agregado correctamente la promoción -")
     print()
