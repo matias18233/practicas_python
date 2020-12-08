@@ -203,8 +203,7 @@ def realizarVenta():
                 elif (index == 1) and (encontrado == True):
                     nombreEncontrado = j
                 elif (index == 2) and (encontrado == True):
-                    # Controlar si no hay promoción
-                    precioEncontrado = j
+                    precioEncontrado = controlarOferta(indiceEncontrado, j)
                     finBusqueda = True
                 if finBusqueda == True:
                     break
@@ -260,6 +259,20 @@ def verVentas():
     print("--------------------------------------")
     print("El total es: $", total)
     print()
+
+def controlarOferta(indiceEncontrado, precio):
+    if len(promociones) == 0:
+        return precio
+    for i in promociones:
+        index = 0
+        encontrado = False
+        for j in i.values():
+            if j == indiceEncontrado:
+                encontrado = True
+            if (index == 2) and (encontrado == True):
+                precio = j
+            index = index + 1
+    return precio
 
 productos = []
 encabezadosProd = ["id", "nombre", "precio", "stock"]
