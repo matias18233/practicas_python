@@ -155,7 +155,34 @@ def eliminarPromocion(index):
 
 # Permite cargar automáticamente productos y promociones en el sistema
 def cargaAutomatica():
-    print("Carga automática de productos")
+    producto = {"id":1, "nombre":"Pepsi", "precio":150, "stock":10}
+    productos.append(producto)
+    producto = {"id":2, "nombre":"Fideo", "precio":40, "stock":8}
+    productos.append(producto)
+    producto = {"id":3, "nombre":"Arroz", "precio":120, "stock":10}
+    productos.append(producto)
+    producto = {"id":4, "nombre":"Caldo", "precio":100, "stock":8}
+    productos.append(producto)
+    producto = {"id":5, "nombre":"Pollo", "precio":240, "stock":10}
+    productos.append(producto)
+    producto = {"id":6, "nombre":"Tomate", "precio":40, "stock":8}
+    productos.append(producto)
+    producto = {"id":7, "nombre":"Galleta", "precio":50, "stock":10}
+    productos.append(producto)
+    producto = {"id":8, "nombre":"Fernet", "precio":550, "stock":8}
+    productos.append(producto)
+    producto = {"id":9, "nombre":"Cerveza", "precio":110, "stock":10}
+    productos.append(producto)
+    producto = {"id":10, "nombre":"Puré", "precio":120, "stock":8}
+    productos.append(producto)
+    promocion = {'id': 10, 'nombre': 'Puré', 'precio': 102.0}
+    promociones.append(promocion)
+    promocion = {'id': 2, 'nombre': 'Fideo', 'precio': 34.0}
+    promociones.append(promocion)
+    promocion = {'id': 4, 'nombre': 'Caldo', 'precio': 85.0}
+    promociones.append(promocion)
+    promocion = {'id': 5, 'nombre': 'Pollo', 'precio': 204.0}
+    promociones.append(promocion)
 
 # Permite realizar una venta
 def realizarVenta():
