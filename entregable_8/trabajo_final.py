@@ -130,15 +130,12 @@ def verPromocion():
             print(j, end="\t\t")
         print()
     print()
-    
-    pass
 
 # Permite eliminar las promociones existentes
 def eliminarPromocion(index):
     global productos
     print("Indique el valor de ID del registro a eliminar:")
     verProducto()
-    
     encontrado = False
     # Recuperamos el id del registro a eliminar
     cadena = index
@@ -186,19 +183,92 @@ def cargaAutomatica():
 
 # Permite realizar una venta
 def realizarVenta():
-    print("realizar venta")
+    global ventas
+    salir = False
+    finBusqueda = False
+    while salir == False:
+        print("Ingrese el valor de ID de uno de los productos siguientes:")
+        verProducto()
+        cadena = input() # Recuperamos el id y precio del registro que le cargaremos un precio de promoción
+        encontrado = False
+        indiceEncontrado = ""
+        precioEncontrado = ""
+        nombreEncontrado = ""
+        for i in productos:
+            index = 0
+            for j in i.values():
+                if (index == 0) and (j == int(cadena)):
+                    indiceEncontrado = j
+                    encontrado = True
+                elif (index == 1) and (encontrado == True):
+                    nombreEncontrado = j
+                elif (index == 2) and (encontrado == True):
+                    # Controlar si no hay promoción
+                    precioEncontrado = j
+                    finBusqueda = True
+                if finBusqueda == True:
+                    break
+                else:
+                    index = index + 1
+            if finBusqueda == True:
+                break
+        print("Ingrese la cantidad de productos a comprar")
+        cadena = input()
+        ventasAux = dict.fromkeys(encabezadosVentas, "")
+        for i in encabezadosVentas:
+            if i == "id":
+                ventasAux[i] = indiceEncontrado
+            elif i == "nombre":
+                ventasAux[i] = nombreEncontrado
+            elif i == "precio":
+                ventasAux[i] = precioEncontrado
+            elif i == "cantidad":
+                ventasAux[i] = int(cadena)
+            elif i == "total":
+                ventasAux[i] = precioEncontrado * int(cadena)
+        ventas.append(ventasAux)
+        print("¿Desea vender otro producto?")
+        print(" 1 - Sí")
+        print(" 2 - No")
+        cadena = input()
+        if int(cadena) == 2:
+            verVentas()
+            print("Presione una tecla para continuar...")
+            cadena = input()
+            salir = True
+        else:
+            finBusqueda = False
 
 # Permite mostrar todas las ventas existentes
 def verVentas():
-    print("ver ventas")
+    if len(ventas) == 0:
+        print("- No hay registros para mostrar -")
+        return 0
+    for i in encabezadosVentas:
+        print(i, end="\t\t")
+    print()
+    total = 0
+    for i in ventas:
+        index = 0
+        for j in i.values():
+            print(j, end="\t\t")
+            if index == 4:
+                total = total + j
+            index = index + 1
+        print()
+    print()
+    print("--------------------------------------")
+    print("El total es: $", total)
+    print()
 
 productos = []
 encabezadosProd = ["id", "nombre", "precio", "stock"]
 promociones = []
 encabezadosProm = ["id", "nombre", "precio"]
 ventas = []
-encabezadosVentas = ["id", "nombre", "precio", "cantidad"]
+encabezadosVentas = ["id", "nombre", "precio", "cantidad", "total"]
 
+cargaAutomatica()
 salir = False
 while salir == False:
     print("--------------------------------------")
@@ -209,11 +279,9 @@ while salir == False:
     print(" 4 - Agregar promoción")
     print(" 5 - Ver promoción")
     print(" 6 - Eliminar promoción")
-    print(" 7 - Cargar automática (prod. y promos)")
-    print(" 8 - Realizar venta")
-    print(" 9 - Ver ventas realizadas")
-    print(" 10 - Salir del programa")
-
+    print(" 7 - Realizar venta")
+    print(" 8 - Ver última venta realizada")
+    print(" 9 - Salir del programa")
     cadena = input()
     if cadena == "1":
         agregarProducto()
@@ -231,10 +299,8 @@ while salir == False:
         cadena = input()
         eliminarPromocion(int(cadena))
     elif cadena == "7":
-        cargaAutomatica()
-    elif cadena == "8":
         realizarVenta()
-    elif cadena == "9":
+    elif cadena == "8":
         verVentas()
-    elif cadena == "10":
+    elif cadena == "9":
         salir = True
